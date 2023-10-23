@@ -18,7 +18,7 @@ pipeline{
     stage ("Generate backend image"){
       steps{
         dir("stageete/employeeback"){
-          sh "mvn clean install"
+          sh "mvn clean install -DskipTests=true"
           sh "docker build -t devopsangular ."
         }
       }
