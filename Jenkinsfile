@@ -12,12 +12,12 @@ pipeline{
     }
     stage ("Clone repo"){
       steps {
-        sh "git clone https://github.com/Zaynebrajhi/devopsangularr.git"
+        sh "git clone https://github.com/Zaynebrajhi/stageete.git"
       }
     }
     stage ("Generate backend image"){
       steps{
-        dir("devopsangularr/springboot/app"){
+        dir("stageete/employeeback"){
           sh "mvn clean install"
           sh "docker build -t devopsangular ."
         }
@@ -25,7 +25,7 @@ pipeline{
     }
     stage ("Build Angular"){
   steps {
-    dir("devopsangularr/angular-app"){ 
+    dir("stageete/empfrond"){ 
        
         sh "docker build -t angular ."  
     }
