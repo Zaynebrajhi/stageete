@@ -1,34 +1,31 @@
-version: '3.8'
 
 services:
-  empfrond:
-    build:
-      context: ./empfrond
-      dockerfile: Dockerfile
+  angular:
+    image: angular
     ports:
       - "4200:4200"
-  employeeback:
-    build:
-      context: ./employeeback
-      dockerfile: Dockerfile
+  spring-boot-app:
+    image: devopsangular
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mydb
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/demo
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - spring.jpa.hibernate.ddl-auto=update
+      - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
     depends_on:
       - mysql
   mysql:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mydb
-    volumes:
-      - mysql_data:/var/lib/mysql
+      MYSQL_DATABASE: 'demo'
+      MYSQL_ROOT_USERNAME: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
     ports:
-      - "3307:3306"
-
+      - "3308:3306"
+    volumes:
+      - demo:/var/lib/mysql
 volumes:
-  mysql_data:
+    demo:
