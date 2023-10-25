@@ -33,6 +33,6 @@ pipeline{
 }
     stage ("Run docker compose"){
       steps { 
-        dir("devopsangularr"){
+        dir("stageete"){
         sh "docker compose up -d"
       }}}}}
